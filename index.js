@@ -40,9 +40,7 @@ app.use("/", indexRouter);
 app.use((err, req, res, next) => {
   // eslint-disable-next-line no-console
   console.error(err);
-  res.status(500).render("errors/error-500", {
-    errorMessage: err.message || "Error 500: Internal Server Error",
-  });
+  res.status(500).json(err.message || "Error 500: Internal Server Error");
 });
 
 app.listen(PORT, () => {

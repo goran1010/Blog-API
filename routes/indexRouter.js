@@ -1,11 +1,17 @@
 import { Router } from "express";
 const indexRouter = Router();
-import indexController from "../controllers/indexController.js";
+import usersRouter from "./usersRouter.js";
+import postsRouter from "./postsRouter.js";
+import commentsRouter from "./commentsRouter.js";
 
-indexRouter.get("/", indexController);
+indexRouter.use("/users", usersRouter);
+
+indexRouter.use("/posts", postsRouter);
+
+indexRouter.use("/comments", commentsRouter);
 
 indexRouter.use((req, res) => {
-  res.status(404).render("errors/error-404");
+  res.status(404).json("No page found");
 });
 
 export default indexRouter;

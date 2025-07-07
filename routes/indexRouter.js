@@ -10,6 +10,10 @@ indexRouter.use("/posts", postsRouter);
 
 indexRouter.use("/comments", commentsRouter);
 
+indexRouter.get("/", (req, res) => {
+  res.status(200).json("OK");
+});
+
 indexRouter.use((req, res) => {
   res.status(404).json("No page found");
 });

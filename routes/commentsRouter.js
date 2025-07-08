@@ -1,8 +1,15 @@
 import { Router } from "express";
 const commentsRouter = Router();
+import * as commentsController from "../controllers/commentsController.js";
 
-commentsRouter.use((req, res) => {
-  res.status(404).json("No page found");
-});
+commentsRouter.get("/", commentsController.getAllComments);
+
+commentsRouter.post("/:CommentID", commentsController.createComment);
+
+commentsRouter.get("/:CommentID", commentsController.getComment);
+
+commentsRouter.delete("/:CommentID", commentsController.deleteComment);
+
+commentsRouter.put("/:CommentID", commentsController.modifyComment);
 
 export default commentsRouter;

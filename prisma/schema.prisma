@@ -21,7 +21,29 @@ model Session {
 }
 
 model User {
-  id       String @id @default(uuid())
-  username String @unique
+  id       String    @id @default(uuid())
+  username String    @unique
   password String
+  isAuthor Boolean
+  posts    Post[]
+  comments Comment[]
+}
+
+model Post {
+  id        String    @id @default(uuid())
+  title     String
+  published Boolean
+  User      User?     @relation(fields: [userId], references: [id])
+  userId    String?
+  comments  Comment[]
+  created   DateTime  @default(now())
+}
+
+model Comment {
+  id      String   @id @default(uuid())
+  User    User?    @relation(fields: [userId], references: [id])
+  userId  String?
+  Post    Post?    @relation(fields: [postId], references: [id])
+  postId  String?
+  created DateTime @default(now())
 }

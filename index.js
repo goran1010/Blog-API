@@ -23,7 +23,7 @@ app.set("view engine", "ejs");
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
-import indexRouter from "./routes/indexRouter.js";
+import apiRouter from "./routes/apiRouter.js";
 
 app.use(sessionMiddleware);
 app.use(passport.session());
@@ -34,7 +34,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", indexRouter);
+app.use("/api", apiRouter);
+
+app.use((req, res) => {
+  res.status(404).json("No resource found");
+});
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {

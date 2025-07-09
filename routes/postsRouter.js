@@ -5,14 +5,14 @@ import * as postsController from "../controllers/postsController.js";
 
 postsRouter.get("/", postsController.getAllPosts);
 
-postsRouter.post("/:postID", postsController.createPost);
+postsRouter.post("/", postsController.createPost);
 
-postsRouter.get("/:postID", postsController.getPost);
+postsRouter.get("/:postId", postsController.getPost);
 
-postsRouter.delete("/:postID", postsController.deletePost);
+postsRouter.delete("/:postId", postsController.deletePost);
 
-postsRouter.put("/:postID", postsController.modifyPost);
+postsRouter.put("/:postId", postsController.modifyPost);
 
-postsRouter.use("/:postID/comments", commentsRouter);
+postsRouter.use("/:postId/comments", commentsRouter);
 
 export default postsRouter;

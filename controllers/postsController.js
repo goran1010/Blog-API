@@ -1,19 +1,31 @@
-export function getAllPosts(req, res) {
-  res.status(200).json("OK");
+import * as postsModel from "../models/postsModel.js";
+
+export async function getAllPosts(req, res) {
+  const posts = await postsModel.getAllPosts();
+  res.status(200).json(posts);
 }
 
-export function createPost(req, res) {
-  res.status(200).json("OK");
+export async function createPost(req, res) {
+  const { title, text, isPublished, userId } = req.body; // Need to change to get from auth
+  await postsModel.createPost(title, text, isPublished, userId);
+  res.status(201).json("Post created");
 }
 
-export function getPost(req, res) {
-  res.status(200).json("OK");
+export async function getPost(req, res) {
+  const { postId } = req.params;
+  const post = await postsModel.getPost(postId);
+  res.status(200).json(post);
 }
 
-export function deletePost(req, res) {
-  res.status(200).json("OK");
+export async function deletePost(req, res) {
+  const { postId } = req.params;
+  await postsModel.deletePost(postId);
+  res.status(200).json("Post deleted");
 }
 
-export function modifyPost(req, res) {
-  res.status(200).json("OK");
+export async function modifyPost(req, res) {
+  const { postId } = req.params;
+  const { title, text, isPublished } = req.body;
+  await postsModel.modifyPost(postId, title, text, isPublished);
+  res.status(200).json("Post modified");
 }

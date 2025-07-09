@@ -1,19 +1,26 @@
-export function getAllComments(req, res) {
-  res.status(200).json("OK");
+import * as commentsModel from "../models/commentsModel.js";
+
+export async function getAllPostComments(req, res) {
+  const { postId } = req.params;
+  const comments = await commentsModel.getAllComments(postId);
+  res.status(200).json(comments);
 }
 
-export function createComment(req, res) {
-  res.status(200).json("OK");
+export async function createComment(req, res) {
+  const { postId } = req.params;
+  const { text, userId } = req.body; // Needs to change to get userId from auth
+  await commentsModel.createComment(text, postId, userId);
+  res.status(201).json("Comment created");
 }
 
-export function getComment(req, res) {
-  res.status(200).json("OK");
+export async function getComment(req, res) {
+  const { commentId } = req.params;
+  const comment = await commentsModel.getComment(commentId);
+  res.status(200).json(comment);
 }
 
-export function deleteComment(req, res) {
-  res.status(200).json("OK");
-}
-
-export function modifyComment(req, res) {
-  res.status(200).json("OK");
+export async function deleteComment(req, res) {
+  const { commentId } = req.params;
+  await commentsModel.deleteComment(commentId);
+  res.status(200).json("Deleted comment");
 }

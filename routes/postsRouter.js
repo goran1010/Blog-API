@@ -2,8 +2,9 @@ import { Router } from "express";
 const postsRouter = Router();
 import commentsRouter from "./commentsRouter.js";
 import * as postsController from "../controllers/postsController.js";
+import isAuthorized from "../auth/isAuthorized.js";
 
-postsRouter.get("/", postsController.getAllPosts);
+postsRouter.get("/", isAuthorized, postsController.getAllPosts);
 
 postsRouter.post("/", postsController.createPost);
 

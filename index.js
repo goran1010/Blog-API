@@ -28,12 +28,6 @@ import authRouter from "./routes/authRouter.js";
 
 app.use(sessionMiddleware);
 app.use(passport.session());
-app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  res.locals.success = req.flash("success");
-  res.locals.fail = req.flash("fail");
-  next();
-});
 
 app.use("/api", apiRouter);
 

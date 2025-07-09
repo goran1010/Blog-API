@@ -7,11 +7,11 @@ export default function isAuthenticated(req, res, next) {
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, "mySecretKey", (err, user) => {
+  jwt.verify(token, "mySecretKey", (err, token) => {
     if (err) {
       return res.sendStatus(403);
     }
-    req.userId = user;
+    req.userId = token.id;
     next();
   });
 }

@@ -10,3 +10,7 @@ export async function createUser(username, password, isAuthor) {
 export async function getUser(username) {
   return await prisma.user.findUnique({ where: { username } });
 }
+
+export async function getUserById(id) {
+  return await prisma.user.findUnique({ where: { id } });
+}

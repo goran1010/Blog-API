@@ -21,7 +21,10 @@ export async function createPost(title, text, isPublished, userId) {
 export async function getPost(id) {
   return await prisma.post.findUnique({
     where: { id },
-    include: { comments: true, User: { select: { username: true } } },
+    include: {
+      comments: { include: { User: { select: { username: true } } } },
+      User: { select: { username: true } },
+    },
   });
 }
 

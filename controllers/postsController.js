@@ -10,7 +10,7 @@ export async function createPost(req, res) {
   let { title, text, isPublished } = req.body;
   if (isPublished === "true") {
     isPublished = true;
-  } else {
+  } else if (isPublished === "false") {
     isPublished = false;
   }
   await postsModel.createPost(title, text, isPublished, userId);

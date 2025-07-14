@@ -1,12 +1,8 @@
 import express from "express";
-import passport from "./auth/passport.js";
 import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
-import flash from "connect-flash";
-app.use(flash());
-import sessionMiddleware from "./auth/sessionMiddleware.js";
 import cors from "cors";
 
 app.use(cors());
@@ -28,9 +24,6 @@ app.use(express.static(assetsPath));
 
 import apiRouter from "./routes/apiRouter.js";
 import authRouter from "./routes/authRouter.js";
-
-app.use(sessionMiddleware);
-app.use(passport.session());
 
 app.use("/api", apiRouter);
 

@@ -7,6 +7,9 @@ const PORT = process.env.PORT || 3000;
 import flash from "connect-flash";
 app.use(flash());
 import sessionMiddleware from "./auth/sessionMiddleware.js";
+import cors from "cors";
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

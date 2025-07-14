@@ -8,7 +8,8 @@ export async function getAllPostComments(req, res) {
 
 export async function createComment(req, res) {
   const { postId } = req.params;
-  const { text, userId } = req.body; // Needs to change to get userId from auth
+  const { userId } = req;
+  const { text } = req.body;
   await commentsModel.createComment(text, postId, userId);
   res.status(201).json("Comment created");
 }

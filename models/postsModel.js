@@ -1,7 +1,15 @@
 import prisma from "../db/prisma.js";
 
 export async function getAllPosts() {
-  return await prisma.post.findMany();
+  return await prisma.post.findMany({
+    include: {
+      User: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
 }
 
 export async function createPost(title, text, isPublished, userId) {
@@ -11,7 +19,10 @@ export async function createPost(title, text, isPublished, userId) {
 }
 
 export async function getPost(id) {
-  return await prisma.post.findUnique({ where: { id } });
+  return await prisma.post.findUnique({
+    where: { id },
+    include: { comments: true, User: { select: { username: true } } },
+  });
 }
 
 export async function deletePost(id) {

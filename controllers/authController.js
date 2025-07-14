@@ -6,13 +6,18 @@ export async function logIn(req, res) {
   try {
     const { username, password } = req.body;
     const user = await usersModel.getUser(username);
+    if (!user) {
+      return res.status(400).json({ message: "User doesn't exist" });
+    }
     const match = await bcrypt.compare(password, user.password);
 
     if (match) {
       const token = jwt.sign({ id: user.id }, "mySecretKey", {
         expiresIn: "30d",
       });
-      res.status(200).json(token);
+      res
+        .status(200)
+        .json({ user: { token, id: user.id, username: user.username } });
     } else {
       res.status(401).json({ message: "Invalid credentials" });
     }

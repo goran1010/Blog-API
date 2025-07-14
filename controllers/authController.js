@@ -17,7 +17,14 @@ export async function logIn(req, res) {
       });
       res
         .status(200)
-        .json({ user: { token, id: user.id, username: user.username } });
+        .json({
+          user: {
+            token,
+            id: user.id,
+            username: user.username,
+            isAuthor: user.isAuthor,
+          },
+        });
     } else {
       res.status(401).json({ message: "Invalid credentials" });
     }

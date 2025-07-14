@@ -6,7 +6,13 @@ export async function getAllPosts(req, res) {
 }
 
 export async function createPost(req, res) {
-  const { title, text, isPublished, userId } = req.body; // Need to change to get from auth
+  const { userId } = req;
+  let { title, text, isPublished } = req.body;
+  if (isPublished === "true") {
+    isPublished = true;
+  } else {
+    isPublished = false;
+  }
   await postsModel.createPost(title, text, isPublished, userId);
   res.status(201).json("Post created");
 }
@@ -25,7 +31,12 @@ export async function deletePost(req, res) {
 
 export async function modifyPost(req, res) {
   const { postId } = req.params;
-  const { title, text, isPublished } = req.body;
+  let { title, text, isPublished } = req.body;
+  if (isPublished === "true") {
+    isPublished = true;
+  } else {
+    isPublished = false;
+  }
   await postsModel.modifyPost(postId, title, text, isPublished);
   res.status(200).json("Post modified");
 }

@@ -4,9 +4,15 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 const MY_SECRET_KEY = process.env.MY_SECRET_KEY;
+import { validationResult } from "express-validator";
 
 export async function logIn(req, res) {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { username, password } = req.body;
     const user = await usersModel.getUser(username);
     if (!user) {

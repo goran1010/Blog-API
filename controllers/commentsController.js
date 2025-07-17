@@ -23,5 +23,5 @@ export async function getComment(req, res) {
 export async function deleteComment(req, res) {
   const { commentId } = req.params;
   await commentsModel.deleteComment(commentId);
-  res.status(200).json("Deleted comment");
+  res.status(200).json("Comment deleted");
 }

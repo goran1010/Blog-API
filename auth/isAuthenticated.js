@@ -7,7 +7,9 @@ export default function isAuthenticated(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (!token) {
-    return res.sendStatus(401);
+    return res
+      .sendStatus(401)
+      .json({ errors: [{ msg: "Expired session token" }] });
   }
 
   jwt.verify(token, MY_SECRET_KEY, (err, token) => {

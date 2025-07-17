@@ -3,6 +3,7 @@ import prisma from "../db/prisma.js";
 export async function getAllPosts() {
   return await prisma.post.findMany({
     include: {
+      comments: true,
       User: {
         select: {
           username: true,

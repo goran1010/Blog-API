@@ -32,11 +32,7 @@ export async function deletePost(req, res) {
 export async function modifyPost(req, res) {
   const { postId } = req.params;
   let { title, text, isPublished } = req.body;
-  if (isPublished === "true") {
-    isPublished = true;
-  } else {
-    isPublished = false;
-  }
+
   await postsModel.modifyPost(postId, title, text, isPublished);
   res.status(200).json("Post modified");
 }

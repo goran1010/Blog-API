@@ -6,11 +6,14 @@ const isAuthorized = [
   async (req, res, next) => {
     const { userId } = req;
     const user = await usersModel.getUserById(userId);
-    console.log(user);
     if (user.isAuthor) {
       next();
     } else {
-      res.status(403).json("Forbidden");
+      res
+        .status(403)
+        .json({
+          errors: [{ msg: "You don't have the required authorization" }],
+        });
     }
   },
 ];

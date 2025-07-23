@@ -10,6 +10,7 @@ export async function getAllPosts() {
         },
       },
     },
+    orderBy: { created: "desc" },
   });
 }
 

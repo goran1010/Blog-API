@@ -21,10 +21,10 @@ Before installation, make sure to:
 
 ```bash
 # Clone the repository
-git clone https://github.com/goran1010/template-express-prisma-backend-jwt.git
+git clone git@github.com:goran1010/Blog-API.git
 
 # Navigate to project directory
-cd template-express-prisma-backend-jwt
+cd Blog-API
 
 # Install dependencies
 npm install
